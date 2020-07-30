@@ -22,7 +22,7 @@ export default () => {
     return (
         <Box className="course-view-container">
             <Box className="player-container">
-                <Typography variant="body1" gutterBottom style={{ textAlign: "center", padding: '0 0 10px 0', fontWeight: 500 }}>COURSE OUTLINE</Typography>
+                <Typography variant="body1" gutterBottom style={{ color:'#ffffffe8',textAlign: "center", padding: '0 0 10px 0', fontWeight: 500 }}>COURSE OUTLINE</Typography>
                 <Box className="player-wrapper">
                     <ReactPlayer url={video} playing={true} className='react-player'
                         config={{ file: { attributes: { controlsList: 'nodownload', onContextMenu: e => e.preventDefault() } } }}
@@ -31,7 +31,7 @@ export default () => {
                         height='100%'
                         controls={true} />
                 </Box>
-                <Typography variant="body1" gutterBottom style={{ color:'rgba(0, 0, 0, 0.87)', paddingLeft: 15, paddingTop: 15, fontWeight: 500, fontSize: 24 }}>{title}</Typography>
+                <Typography variant="body1" gutterBottom style={{ color:'#ffffffe8', paddingLeft: 15, paddingTop: 15, fontWeight: 500, fontSize: 24 }}>{title}</Typography>
             </Box>
             <Box className="playlist">
                 {VideoData.map(index => {

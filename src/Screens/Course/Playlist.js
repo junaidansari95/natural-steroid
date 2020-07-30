@@ -25,7 +25,7 @@ export default (props) => {
         props.handleSetVideo(index)
     }
     return (
-        <List style={{ background: 'white' }}>
+        <List>
             <ListItem button onClick={handleClick}>
                 <ListItemText primary={"Module: "+props.module.module_name} />
                 {open ? <ExpandLess /> : <ExpandMore />}
