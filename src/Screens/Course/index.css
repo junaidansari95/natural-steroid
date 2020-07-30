@@ -1,0 +1,41 @@
+.course-view-container{
+    width: 100%;
+    padding: 15px;
+}
+.video-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+    /* 720 / 1280 = 0.5625 */
+}
+
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.playlist {
+    height: 506.25px;
+    overflow: scroll;
+}
+@media only screen and (min-width: 1200px) {
+    .player-container{
+        min-width: 900px;
+    }
+    .playlist {
+        height: 506.25px;
+        overflow: scroll;
+        margin-top: 40px;
+    }
+    .course-view-container{
+        width: 100%;
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+    }
+}
