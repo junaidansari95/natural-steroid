@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import './index.css';
 import Playlist from './Playlist';
@@ -6,6 +7,7 @@ import { Box, Typography } from '@material-ui/core';
 import useForceUpdate from 'use-force-update';
 import VideoData from '../../VideoData';
 export default () => {
+    const [module, setModule] = React.useState(VideoData[0]);
     const [video, setVideo] = React.useState(VideoData[0].module_data[0].src);
     const [title, setTitle] = React.useState(VideoData[0].module_data[0].name);
     const [index, setIndex] = React.useState(VideoData[0].module_data[0]);
@@ -17,21 +19,40 @@ export default () => {
     }
     const onVideoEnd = () => {
         index.completed = true;
-        forceUpdate();
+        /////////////////////////////////// Set next video
+        let element = module.module_data.indexOf(index);
+        if(element >= 0 && element < module.module_data.length - 1){
+            let nextItem = module.module_data[element + 1]
+            handleSetVideo(nextItem);
+        }
+        else{
+            ////////////////////////////////////////// set next module
+            let modulesElement = VideoData.indexOf(module);
+            if(modulesElement >= 0 && modulesElement < VideoData.length - 1){
+                let nextModule = VideoData[modulesElement+1]
+                setModule(nextModule);
+                handleSetVideo(nextModule.module_data[0]);
+            }
+        }
+        // forceUpdate();
     }
     return (
         <Box className="course-view-container">
             <Box className="player-container">
-                <Typography variant="body1" gutterBottom style={{ color:'#ffffffe8',textAlign: "center", padding: '0 0 10px 0', fontWeight: 500 }}>COURSE OUTLINE</Typography>
+                <Typography variant="body1" gutterBottom style={{ color: '#ffffffe8', textAlign: "center", padding: '0 0 10px 0', fontWeight: 500 }}>COURSE OUTLINE</Typography>
                 <Box className="player-wrapper">
-                    <ReactPlayer url={video} playing={true} className='react-player'
-                        config={{ file: { attributes: { controlsList: 'nodownload', onContextMenu: e => e.preventDefault() } } }}
+                    <ReactPlayer
+                        config={{ file: { attributes: { controlsList: 'nodownload', onContextMenu: e => e.preventDefault(), autoPlay: true, muted: true} } }}
+                        playing={true}
+                        url={video}
                         onEnded={onVideoEnd}
+                        controls={true}
                         width='100%'
                         height='100%'
-                        controls={true} />
+                        className='react-player'
+                    />
                 </Box>
-                <Typography variant="body1" gutterBottom style={{ color:'#ffffffe8', paddingLeft: 15, paddingTop: 15, fontWeight: 500, fontSize: 24 }}>{title}</Typography>
+                <Typography variant="body1" gutterBottom style={{ color: '#ffffffe8', paddingLeft: 15, paddingTop: 15, fontWeight: 500, fontSize: 24 }}>{title}</Typography>
             </Box>
             <Box className="playlist">
                 {VideoData.map(index => {

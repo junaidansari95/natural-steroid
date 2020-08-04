@@ -1,6 +1,5 @@
 .course-view-container{
     width: 100%;
-    padding: 15px;
     background-color: #505050;
 }
 .video-box {
@@ -36,7 +35,6 @@
     }
     .course-view-container{
         width: 100%;
-        padding: 15px;
         display: flex;
         flex-direction: row;
     }
