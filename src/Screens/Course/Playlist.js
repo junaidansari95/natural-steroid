@@ -33,7 +33,7 @@ export default (props) => {
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     {props.module.module_data.map(index => {
-                        return (<ListItem button className={classes.nested} key={index.name}>
+                        return (<ListItem button className={classes.nested} key={index.name} style={{ backgroundImage: index.playing ? 'linear-gradient(85deg, #6200ea 0%, #6200ea 100%)' : 'none', color: index.playing ? 'white' : 'black'}}>
                             <ListItemIcon>
                                 <PlayCircleOutlineIcon/>
                             </ListItemIcon>

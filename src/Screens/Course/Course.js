@@ -17,8 +17,19 @@ export default () => {
         setVideo(index.src);
         setTitle(index.name);
     }
+    const onVideoPlay = () => {
+        VideoData.forEach(module=>{
+            module.module_data.forEach(video=>{
+                video.playing= false
+            })
+        })
+        index.playing = true;
+        forceUpdate();
+    }
     const onVideoEnd = () => {
         index.completed = true;
+        index.playing = false;
+        // forceUpdate();
         /////////////////////////////////// Set next video
         let element = module.module_data.indexOf(index);
         if(element >= 0 && element < module.module_data.length - 1){
@@ -34,17 +45,16 @@ export default () => {
                 handleSetVideo(nextModule.module_data[0]);
             }
         }
-        // forceUpdate();
     }
     return (
         <Box className="course-view-container">
             <Box className="player-container">
-                <Typography variant="body1" gutterBottom style={{ color: '#ffffffe8', textAlign: "center", padding: '0 0 10px 0', fontWeight: 500 }}>COURSE OUTLINE</Typography>
                 <Box className="player-wrapper">
                     <ReactPlayer
                         config={{ file: { attributes: { controlsList: 'nodownload', onContextMenu: e => e.preventDefault(), autoPlay: true, muted: true} } }}
                         playing={true}
                         url={video}
+                        onPlay={onVideoPlay}
                         onEnded={onVideoEnd}
                         controls={true}
                         width='100%'
@@ -52,7 +62,6 @@ export default () => {
                         className='react-player'
                     />
                 </Box>
-                <Typography variant="body1" gutterBottom style={{ color: '#ffffffe8', paddingLeft: 15, paddingTop: 15, fontWeight: 500, fontSize: 24 }}>{title}</Typography>
             </Box>
             <Box className="playlist">
                 {VideoData.map(index => {
